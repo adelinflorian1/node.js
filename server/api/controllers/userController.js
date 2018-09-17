@@ -9,6 +9,16 @@ exports.list_all_users = function(req, res) {
     });
 };
 
+exports.get_user_by_id = function(req, res) {
+    User.find({
+        _id:req.params.userId
+    }, function(err, task) {
+        if (err)
+            res.send(err);
+        res.json(task);
+    });
+};
+
 exports.create_a_user = function(req, res) {
     var new_user = new User(req.body);
     new_user.save(function(err, task) {

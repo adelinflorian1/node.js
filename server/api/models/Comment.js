@@ -1,31 +1,25 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var PostSchema = new Schema({
+var CommentSchema = new Schema({
     authorId: {
         type: String,
         required: 'Need authorId',
-    },
-    images:{
-        type:String,
-        default: '',
     },
     time:{
         type:Number,
         default: Date.now,
     },
-    type:{
-        type: String,
-        default: 'Photo',
-    },
     text:{
         type:String,
         default: '',
     },
-    commentsNumber:{
-        type:Number,
-        default: 0,
+
+    postId: {
+        type: String,
+        required: 'Need postId',
     },
+
     authorName:{
         type:String,
         required: 'Need authorName'
@@ -36,4 +30,4 @@ var PostSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Posts', PostSchema);
+module.exports = mongoose.model('Comments', CommentSchema);

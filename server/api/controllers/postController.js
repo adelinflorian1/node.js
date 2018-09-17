@@ -9,6 +9,16 @@ exports.list_all_posts = function(req, res) {
     });
 };
 
+exports.get_post_by_id = function(req, res) {
+    Post.find({
+        _id:req.params.postId
+    }, function(err, task) {
+        if (err)
+            res.send(err);
+        res.json(task);
+    });
+};
+
 exports.create_a_post = function(req, res) {
     var new_Post = new Post(req.body);
     new_Post.save(function(err, task) {

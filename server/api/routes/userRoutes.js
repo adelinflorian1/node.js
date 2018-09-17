@@ -6,5 +6,6 @@ module.exports = function(app) {
         .post(user.create_a_user);
 
     app.route('/user/:userId')
+        .get(user.get_user_by_id)
         .delete(user.delete_a_user);
 };

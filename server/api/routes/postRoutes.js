@@ -5,6 +5,7 @@ module.exports = function(app) {
         .get(post.list_all_posts)
         .post(post.create_a_post);
 
-    app.route('/post/:post')
+    app.route('/post/:postId')
+        .get(post.get_post_by_id)
         .delete(post.delete_a_post);
 };

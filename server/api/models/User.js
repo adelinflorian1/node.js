@@ -9,6 +9,10 @@ var UserSchema = new Schema({
     email: {
         type: String,
         required: 'Kindly enter the email'
+    },
+    password: {
+        type: String,
+        required: 'Kindly enter the password'
     }
 });
 
