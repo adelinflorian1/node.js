@@ -10,6 +10,13 @@ var express = require('express'),
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Tododb');
 
+var AuthController = require('./api/controllers/authController');
+app.use(AuthController);
+
+app.use(function (req, res, next) {
+    if (req.get('authToken')) next('route');
+    else res.status(401).send('No authToken provided')
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -22,8 +29,4 @@ commentRoutes(app);
 postRoutes(app);
 userRoutes(app);
 
-
 app.listen(port);
-
-
-console.log('todo list RESTful API server started on: ' + port);
