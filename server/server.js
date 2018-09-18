@@ -7,6 +7,9 @@ var express = require('express'),
     Comment = require('./api/models/Comment'),
     bodyParser = require('body-parser');
 
+var jwt = require('jsonwebtoken');
+var config = require('./config');
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Tododb');
 
@@ -14,8 +17,10 @@ var AuthController = require('./api/controllers/authController');
 app.use(AuthController);
 
 app.use(function (req, res, next) {
-    if (req.get('authToken')) next('route');
-    else res.status(401).send('No authToken provided')
+    jwt.verify(req.get('authToken'), config.secret, function(err, decoded) {
+        if (err) return res.status(401).send({ auth: false, message: 'Failed to authenticate token.' });
+        next('route')
+    });
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
