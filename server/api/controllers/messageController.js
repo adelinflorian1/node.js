@@ -10,9 +10,8 @@ exports.list_all_messages = function(req, res) {
 };
 
 exports.create_a_message = function(req, res) {
-    console.log(req.body);
     var new_message = new Message(req.body);
-    
+
     new_message.save(function (err, task) {
         if (err)
             res.send(err);
